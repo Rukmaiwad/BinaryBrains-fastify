@@ -8,7 +8,7 @@ const startServer = async () => {
         await app.listen({ port: PORT });
         app.log.info(`Fastify Server Of Binary Brains Running On PORT : ${PORT}`);
     } catch (error) {
-        app.log.error("Error While Initializing Fastify Server");
+        app.log.error(`Error While Initializing Fastify Server: ${error.message}`);
         process.exit(1);
     }
 };
