@@ -6,8 +6,10 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
 import { FastifyInstance } from "fastify";
+import { getLogger } from "../utils/logger";
 
 dotenv.config();
+const logger = getLogger();
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -35,11 +37,11 @@ export const connectDB = async (fastify: FastifyInstance) => {
   try {
     await Promise.all([
       AppDataSource.initialize().then(() => {
-        fastify.log.info("MySql connected successfully!");
+        logger.info("MySql connected successfully!");
       }),
     ]);
   } catch (error) {
-    console.error("ERROR IN CONNECTING DATABASES:", error);
+    logger.error("ERROR IN CONNECTING DATABASES:", error);
     process.exit(1);
   }
 };
