@@ -11,6 +11,7 @@ import dotenv from 'dotenv';
 import helloWorldRouter from './routes/helloWorldRouter';
 import authRouter from './routes/authRouter';
 import mongoosePlugin from './plugins/mongoose';
+import { initLogger } from './utils/logger';
 
 dotenv.config();
 const app = Fastify({ logger: true });
@@ -40,5 +41,8 @@ app.register(fastifyJwt, {
 // ALL ROUTES WILL COME HERE
 app.register(helloWorldRouter, { prefix : '/api/helloWorld' });
 app.register(authRouter, { prefix: '/api/auth' })
+
+// initialize logger here
+initLogger(app);
 
 export default app; 
