@@ -10,6 +10,7 @@ import fastifyCookie from '@fastify/cookie';
 import dotenv from 'dotenv';
 import helloWorldRouter from './routes/helloWorldRouter';
 import authRouter from './routes/authRouter';
+import mongoosePlugin from './plugins/mongoose';
 
 dotenv.config();
 const app = Fastify({ logger: true });
@@ -18,6 +19,9 @@ const app = Fastify({ logger: true });
 app.register(fastifyCors, {
     origin: true
 });
+
+// Register mongoose plugin
+app.register(mongoosePlugin);
 
 // mongodb connection
 app.register(fastifyMongodb, {
