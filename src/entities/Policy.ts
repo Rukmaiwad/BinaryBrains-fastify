@@ -26,6 +26,12 @@ export class Policy extends BaseEntity {
     @ManyToOne(() => Scope, (scope) => scope.policies, { onDelete: "NO ACTION" })
     scope: Scope 
 
+    @Column({
+        type: "tinyint",
+        default: 0,
+    })
+    isDeleted: boolean
+
     @ManyToOne(() => User, {onDelete: "NO ACTION", nullable: true})
     @JoinColumn()
     createdBy: User 
@@ -33,6 +39,7 @@ export class Policy extends BaseEntity {
     @ManyToOne(() => User, {onDelete: "NO ACTION", nullable: true})
     @JoinColumn()
     updatedBy: User
+
     @CreateDateColumn()
     createdAt: Date
 

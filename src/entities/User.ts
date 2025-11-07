@@ -28,6 +28,11 @@ export class User extends BaseEntity {
   @Column({ nullable: true, default: UserRole.STUDENT })
     role: string
 
+  @Column({
+         nullable:true,
+    })
+   token: string
+
   @OneToMany(() => UserRoleMap, userRoleMap => userRoleMap.user)
   public userRoleMaps!: UserRoleMap[];
 

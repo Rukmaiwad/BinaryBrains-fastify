@@ -11,27 +11,27 @@ import { getLogger } from "../utils/logger";
 dotenv.config();
 const logger = getLogger();
 
-export const AppDataSource = new DataSource({
-  type: "mysql",
-  host: process.env.MYSQL_HOST,
-  port: parseInt(process.env.MYSQL_PORT),
-  username: 'root',
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-  synchronize: true,
-  logging: true,
-  entities: [__dirname + "/../entities/**/*.js"],
-});
-
-// It can also be used1 in place of the above code in the case we have the url
-
 // export const AppDataSource = new DataSource({
 //   type: "mysql",
-//   url: process.env.MYSQL_URL,
+//   host: process.env.MYSQL_HOST,
+//   port: parseInt(process.env.MYSQL_PORT),
+//   username: 'root',
+//   password: process.env.MYSQL_PASSWORD,
+//   database: process.env.MYSQL_DATABASE,
 //   synchronize: true,
 //   logging: true,
 //   entities: [__dirname + "/../entities/**/*.js"],
 // });
+
+// It can also be used1 in place of the above code in the case we have the url
+
+export const AppDataSource = new DataSource({
+  type: "mysql",
+  url: process.env.MYSQL_URL,
+  synchronize: true,
+  logging: true,
+  entities: [__dirname + "/../entities/**/*.js"],
+});
 
 export const connectDB = async (fastify: FastifyInstance) => {
   try {
