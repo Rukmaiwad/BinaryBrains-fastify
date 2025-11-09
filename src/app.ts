@@ -16,6 +16,16 @@ import { initLogger } from './utils/logger';
 dotenv.config();
 const app = Fastify({ logger: true });
 
+// initialize logger here
+initLogger(app);
+
+import { permissionRoutes } from './routes/permissionRouter';
+import { policyRoutes } from './routes/policyRouter';
+import { roleRoutes } from './routes/roleRouter';
+import { resourceRoutes } from './routes/resourceRouter';
+import { scopeRoutes } from './routes/scopeRouter';
+
+
 // registering cors to get the requests.
 app.register(fastifyCors, {
     origin: true
@@ -41,8 +51,15 @@ app.register(fastifyJwt, {
 // ALL ROUTES WILL COME HERE
 app.register(helloWorldRouter, { prefix : '/api/helloWorld' });
 app.register(authRouter, { prefix: '/api/auth' })
+// RBAC ROUTES
+app.register(permissionRoutes, { prefix: '/api/permission' });
+app.register(policyRoutes, { prefix: '/api/policy' });
+app.register(roleRoutes, { prefix: '/api/role' });
+app.register(resourceRoutes, { prefix: '/api/resource'});
+app.register(scopeRoutes, { prefix: '/api/scope' });
 
-// initialize logger here
-initLogger(app);
+
+
+
 
 export default app; 
